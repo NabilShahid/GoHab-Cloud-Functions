@@ -7,16 +7,18 @@
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "deployLocal": "tsc && functions deploy api --trigger-http",
+    "deployLocalInspect": "tsc && functions deploy api --trigger-http && functions insepct api"
   },
   "engines": {
     "node": "8"
   },
   "main": "lib/index.js",
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.17.0",
     "firebase": "^6.0.2",
-    "firebase-admin": "~7.0.0",
+    "firebase-admin": "^7.3.0",
     "firebase-functions": "^2.3.0"
   },
   "devDependencies": {

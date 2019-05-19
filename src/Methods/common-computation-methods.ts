@@ -11,7 +11,7 @@ export function getOverdueItems(
     .map((item:any) => item.id);
     return{
       Count:itemsIds.length,
-      Ids:items,
+      Ids:itemsIds,
       ItemType:itemType
     }
 }

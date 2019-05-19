@@ -1,5 +1,5 @@
 import firestoreInstance from "../firebase";
-import {logException} from "../logger";
+import { logException } from "../logger";
 export function getCollectionForUser(
   collection: string,
   userEmail: string
@@ -11,11 +11,12 @@ export function getCollectionForUser(
       .then(querySnapshot => {
         const allItems = querySnapshot.docs.map(function(doc) {
           return { ...doc.data(), id: doc.id };
-        });
-        resolve(allItems);
+        });        
+        resolve({Items:allItems,Collection:collection});
       })
-      .catch(ex=>{
-          logException(ex,userEmail);
+      .catch(ex => {
+        logException(ex, userEmail);
+        reject(ex);
       });
   });
 }
