@@ -9,7 +9,7 @@
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "deployLocal": "tsc && functions deploy api --trigger-http",
-    "deployLocalInspect": "tsc && functions deploy api --trigger-http && functions insepct api"
+    "deployLocalInspect": "tsc && functions deploy api --trigger-http && functions inspect api"
   },
   "engines": {
     "node": "8"
