@@ -1,7 +1,6 @@
 import { CountAndIds } from "./../interfaces";
 export function getOverdueItems(
-  items: any,
-  itemType: string
+  items: any
 ): CountAndIds {
   let itemsIds = items
     .filter(
@@ -11,8 +10,7 @@ export function getOverdueItems(
     .map((item:any) => item.id);
     return{
       Count:itemsIds.length,
-      Ids:itemsIds,
-      ItemType:itemType
+      Ids:itemsIds
     }
 }
  

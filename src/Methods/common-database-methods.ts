@@ -1,9 +1,10 @@
 import firestoreInstance from "../firebase";
 import { logException } from "../logger";
+import { Collection } from "../interfaces";
 export function getCollectionForUser(
   collection: string,
   userEmail: string
-): Promise<Object> {
+): Promise<Collection> {
   return new Promise((resolve: any, reject: any) => {
     firestoreInstance
       .collection(`UsersInfo/${userEmail}/${collection}`)
