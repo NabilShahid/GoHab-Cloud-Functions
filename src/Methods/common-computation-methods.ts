@@ -1,6 +1,6 @@
-import { CountAndIds } from "./../interfaces";
+import { NotificationItem } from './../interfaces';
 import * as moment from 'moment';
-export function getDueItems(items: any, time: string): CountAndIds {
+export function getDueItems(items: any,collection:string, time: string): NotificationItem {
   let currDateMS = new Date().setHours(0, 0, 0, 0);
 
   let itemsIds = items
@@ -15,8 +15,8 @@ export function getDueItems(items: any, time: string): CountAndIds {
     })
     .map((item: any) => item.id);
   return {
-    Count: itemsIds.length,
-    Ids: itemsIds
+    Ids:itemsIds,
+    Info:[itemsIds.length,collection,time]
   };
 }
 

@@ -1,45 +1,38 @@
-import { COLLECTION_NAMES } from "./../constants";
-import { NotificationItems } from "./../interfaces";
+import { CollectionNames } from "./../constants";
 import { getDueItems } from "../Methods/common-computation-methods";
 import { getCollectionForUser } from "../Methods/common-database-methods";
 import { logException } from "../logger";
+import { NotificationItem } from "../interfaces";
 export function getNotificationCountsAndIDs(
   userEmail: string,
   items: string
-): Promise<NotificationItems> {
+): Promise<Array<NotificationItem>> {
   return new Promise((resolve, reject) => {
     Promise.all([
-      getCollectionForUser(COLLECTION_NAMES.Goals, userEmail),
-      getCollectionForUser(COLLECTION_NAMES.Tasks, userEmail)
+      getCollectionForUser(CollectionNames.Goals, userEmail),
+      getCollectionForUser(CollectionNames.Tasks, userEmail)
     ])
       .then(function(values) {
         //overdue items
-        let allNotificationItems: NotificationItems = {
-          OverdueItems: {},
-          WeekItems: {},
-          TodayItems: {},
-          HabitItems: {}
-        };
-        const overdueItems = values.reduce(
-          (prev: any, { Items, Collection }: any) => {
+        let allNotificationItems: Array<NotificationItem> = values
+          .reduce((prev: any, { Items, Collection }: any) => {
             if (
-              Collection === COLLECTION_NAMES.Goals ||
-              Collection === COLLECTION_NAMES.Tasks
+              Collection === CollectionNames.Goals ||
+              Collection === CollectionNames.Tasks
             ) {
               if (
                 items.indexOf(Collection.toLowerCase()) > -1 ||
                 items.indexOf("all") > -1
               ) {
-                prev.OverdueItems[Collection] = getDueItems(Items, "overdue");
-                prev.TodayItems[Collection] = getDueItems(Items, "today");
-                prev.WeekItems[Collection] = getDueItems(Items, "week");
+                prev.push(getDueItems(Items,Collection, "overdue"));
+                prev.push(getDueItems(Items,Collection, "today"));
+                prev.push(getDueItems(Items,Collection, "week"));
               }
             }
             return prev;
-          },
-          allNotificationItems
-        );
-        resolve(overdueItems);
+          }, [])
+          .filter((item: NotificationItem) => item.Info[0]);
+        resolve(allNotificationItems);
       })
       .catch(ex => {
         logException(ex, userEmail);

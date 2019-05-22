@@ -1,11 +1,11 @@
-import { NotificationItems } from "./../interfaces";
+import { NotificationItem } from "./../interfaces";
 import * as express from "express";
 import { getNotificationCountsAndIDs } from "../DatabaseOperations/get-notification-counts-and-ids";
 import { logException } from "../logger";
 const notificationsRouter = express.Router();
 notificationsRouter.get("/:user/:items", function(req, res) {
   getNotificationCountsAndIDs(req.params.user, req.params.items)
-    .then((result: NotificationItems) => {
+    .then((result: Array<NotificationItem>) => {
       res.send(JSON.stringify(result));
     })
     .catch(ex => {
