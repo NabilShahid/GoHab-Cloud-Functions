@@ -4,7 +4,8 @@ import { getDueItems } from "../Methods/common-computation-methods";
 import { getCollectionForUser } from "../Methods/common-database-methods";
 import { logException } from "../logger";
 export function getNotificationCountsAndIDs(
-  userEmail: string
+  userEmail: string,
+  items: string
 ): Promise<NotificationItems> {
   return new Promise((resolve, reject) => {
     Promise.all([
@@ -13,18 +14,26 @@ export function getNotificationCountsAndIDs(
     ])
       .then(function(values) {
         //overdue items
-        let allNotificationItems:NotificationItems={
-          OverdueItems:{},
-          WeekItems:{},
-          TodayItems:{},
-          HabitItems:{}
+        let allNotificationItems: NotificationItems = {
+          OverdueItems: {},
+          WeekItems: {},
+          TodayItems: {},
+          HabitItems: {}
         };
         const overdueItems = values.reduce(
           (prev: any, { Items, Collection }: any) => {
-            if(Collection===COLLECTION_NAMES.Goals||Collection===COLLECTION_NAMES.Tasks){
-              prev.OverdueItems[Collection] = getDueItems(Items,"overdue");
-              prev.TodayItems[Collection] = getDueItems(Items,"today");
-              prev.WeekItems[Collection] = getDueItems(Items,"week");
+            if (
+              Collection === COLLECTION_NAMES.Goals ||
+              Collection === COLLECTION_NAMES.Tasks
+            ) {
+              if (
+                items.indexOf(Collection.toLowerCase()) > -1 ||
+                items.indexOf("all") > -1
+              ) {
+                prev.OverdueItems[Collection] = getDueItems(Items, "overdue");
+                prev.TodayItems[Collection] = getDueItems(Items, "today");
+                prev.WeekItems[Collection] = getDueItems(Items, "week");
+              }
             }
             return prev;
           },
