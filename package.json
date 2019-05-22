@@ -19,7 +19,8 @@
     "express": "^4.17.0",
     "firebase": "^6.0.2",
     "firebase-admin": "^7.3.0",
-    "firebase-functions": "^2.3.0"
+    "firebase-functions": "^2.3.0",
+    "moment": "^2.24.0"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.1.6",

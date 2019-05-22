@@ -24,6 +24,7 @@ export function getNotificationCountsAndIDs(
             if(Collection===COLLECTION_NAMES.Goals||Collection===COLLECTION_NAMES.Tasks){
               prev.OverdueItems[Collection] = getDueItems(Items,"overdue");
               prev.TodayItems[Collection] = getDueItems(Items,"today");
+              prev.WeekItems[Collection] = getDueItems(Items,"week");
             }
             return prev;
           },
