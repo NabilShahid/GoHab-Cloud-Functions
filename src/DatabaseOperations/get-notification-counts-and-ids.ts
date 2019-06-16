@@ -1,5 +1,6 @@
 import { CollectionNames } from "./../constants";
 import { getDueItems } from "../Methods/common-computation-methods";
+import { getPendingHabits } from "../Methods/habit.methods";
 import { getCollectionForUser } from "../Methods/common-database-methods";
 import { logException } from "../logger";
 import { NotificationItem } from "../interfaces";
@@ -10,7 +11,8 @@ export function getNotificationCountsAndIDs(
   return new Promise((resolve, reject) => {
     Promise.all([
       getCollectionForUser(CollectionNames.Goals, userEmail),
-      getCollectionForUser(CollectionNames.Tasks, userEmail)
+      getCollectionForUser(CollectionNames.Tasks, userEmail),
+      getCollectionForUser(CollectionNames.Habits, userEmail)
     ])
       .then(function(values) {
         //overdue items
@@ -28,6 +30,9 @@ export function getNotificationCountsAndIDs(
                 prev.push(getDueItems(Items,Collection, "today"));
                 prev.push(getDueItems(Items,Collection, "week"));
               }
+            }
+            else if(Collection==CollectionNames.Habits){
+              getPendingHabits(Items,Collection,"pending")
             }
             return prev;
           }, [])
