@@ -1,6 +1,6 @@
 import { CollectionNames } from "./../constants";
 import { getDueItems } from "../Methods/common-computation-methods";
-// import { getPendingHabits } from "../Methods/habit.methods";
+import { getPendingHabits } from "../Methods/habit.methods";
 import { getCollectionForUser } from "../Methods/common-database-methods";
 import { logException } from "../logger";
 import { NotificationItem } from "../interfaces";
@@ -43,7 +43,7 @@ export function getNotificationCountsAndIDs(
                 prev.push(getDueItems(Items, Collection, "week"));
               }
             } else if (Collection == CollectionNames.Habits) {
-              // getPendingHabits(Items,Collection,"pending")
+              prev.push(getPendingHabits(Items, Collection));
             }
             return prev;
           }, [])

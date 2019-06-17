@@ -7,6 +7,5 @@ firebase.initializeApp(
   databaseURL: "https://test-project-1-ba9d5.firebaseio.com"
 }
 );
-console.log("Firebase Initialization");
 let firestoreInstance = firebase.firestore();
 export default firestoreInstance;

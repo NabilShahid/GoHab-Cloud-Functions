@@ -1,7 +1,11 @@
 import { NotificationItem } from "../interfaces";
-export function getPendingHabits(): NotificationItem {
+export function getPendingHabits(
+  items: any,
+  collection: string
+): NotificationItem {
+  let itemIds = items.map((item: any) => item.id);
   return {
-    Ids: ["fs","asdf"],
-    Info: [2,32,"fasdf"]
+    Ids: itemIds,
+    Info: [itemIds.length, collection]
   };
 }
