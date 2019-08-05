@@ -1,9 +1,6 @@
 import * as express from 'express';
 import notificationsRouter from "./NotificationsRouter/notifications-router";
 const expressAppInstance=express();
-import firestoreInstance from "./firebase";
-console.log(firestoreInstance);
-
 //set json parsing for incoming reqeust
 expressAppInstance.use(express.json());
 //set headers for cors
@@ -12,11 +9,8 @@ expressAppInstance.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
-
 //set routers
 expressAppInstance.use("/notifications",notificationsRouter);
-
-
 
 export default expressAppInstance;
 
