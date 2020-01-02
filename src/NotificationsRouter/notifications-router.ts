@@ -6,6 +6,7 @@ const notificationsRouter = express.Router();
 notificationsRouter.get("/:user/:items", function(req, res) {
   getNotificationCountsAndIDs(req.params.user, req.params.items)
     .then((result: Array<NotificationItem>) => {
+      // res.send("HELLO WORLD");
       res.send(JSON.stringify(result));
     })
     .catch(ex => {

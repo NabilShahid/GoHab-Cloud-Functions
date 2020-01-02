@@ -4,7 +4,7 @@ import PROJECTSA from "./projectsa";
 firebase.initializeApp(
   {
   credential: firebase.credential.cert(PROJECTSA as any),
-  databaseURL: "https://test-project-1-ba9d5.firebaseio.com"
+  databaseURL: "https://gohab-prod.firebaseio.com"
 }
 );
 let firestoreInstance = firebase.firestore();
