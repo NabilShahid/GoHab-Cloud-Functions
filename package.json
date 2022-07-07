@@ -21,7 +21,7 @@
     "firebase": "^6.6.2",
     "firebase-admin": "^7.4.0",
     "firebase-functions": "^2.3.0",
-    "moment": "^2.24.0"
+    "moment": "^2.29.4"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.1.7",
